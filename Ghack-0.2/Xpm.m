@@ -165,26 +165,39 @@ static char * character_rogue_16x16_1_xpm[] = {
 	free(f);
 
 	idx = 0;
-	int i = 0;
+	int i = 1;
 	//FIXMENOTE a color symbol is one char wide (xpm with 256 colors )!
 	symboltable = (int*)malloc(sizeof(int)*256);
 
 	for ( ; i < ncolors; i++) {
 		char *line = data[i];
+
 		int lineidx = 0;
 		//skip first " char on colorsymbol line
 		[self skipChar:'"' data:line atIndex:&lineidx];
-		char *colorsymbols = [self getWord:line atIndex:&lineidx];
-		//set colorsymbo which is 1 char wide
-		char colorsymbol = colorsymbols[0];
-		free(colorsymbols);
+		char colorsymbol;
+		//whitespace color symbol
+		if (line[lineidx] == ' ') {
+			[self skipChar:'\t' data:line atIndex:&lineidx];
+			[self skipChar:' ' data:line atIndex:&lineidx];
+			[self skipChar:'c' data:line atIndex:&lineidx];
+			[self skipChar:' ' data:line atIndex:&lineidx];
+			char *colorsymbols = ' ';
+			//set colorsymbol which is 1 char wide
+			colorsymbol = colorsymbols[0];
+			free(colorsymbols);
+		} else {	
+			char *colorsymbols = [self getWord:line atIndex:&lineidx];
+			//set colorsymbol which is 1 char wide
+			colorsymbol = colorsymbols[0];
+			free(colorsymbols);
 
-		//FIXME skip everything until c char
-		[self skipChar:'\t' data:data[0] atIndex:&lineidx];
-		[self skipChar:' ' data:data[0] atIndex:&lineidx];
-		[self skipChar:'c' data:data[0] atIndex:&lineidx];
-		[self skipChar:' ' data:data[0] atIndex:&lineidx];
-
+			//FIXME skip everything until c char
+			[self skipChar:'\t' data:line atIndex:&lineidx];
+			[self skipChar:' ' data:line atIndex:&lineidx];
+			[self skipChar:'c' data:line atIndex:&lineidx];
+			[self skipChar:' ' data:line atIndex:&lineidx];
+		}
 		//read hex color string with '#HEX' or None	
 		char* colornumberstr = [self getWord:line atIndex:&lineidx];
 		if (!strncmp(colornumberstr, "None",4) || !strncmp(colornumberstr, "none", 4)) {
@@ -203,9 +216,12 @@ static char * character_rogue_16x16_1_xpm[] = {
 	symboldata = (char*)malloc(row*col);
 	for ( ; j < col; j++) {
 		char *line = data[j+i];
-		for ( ; k < row; k++) {
+
+		//k+! for skipping "
+		for ( ; k+1 < row; k++) {
 			symboldata[k+row*j] = line[k+1];//skip " at begin and end 
 		}
+		k = 0;	
 	}
 
 	return self;
