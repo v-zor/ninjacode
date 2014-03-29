@@ -155,7 +155,7 @@ static char * character_rogue_16x16_1_xpm[] = {
 	int numcolors = atoi(cnc);
 	[self setNColors:numcolors];
 	[self skipChar:' ' data:data[0] atIndex:&idx];
-	//read in rest of line
+	//read in rest of line //FIXME == bpp
 	char *f = [self getWord:data[0] atIndex:&idx];
 	[self skipChar:'"' data:data[0] atIndex:&idx];
 
