@@ -266,7 +266,7 @@ static char * character_rogue_16x16_1_xpm[] = {
 	int i = *idx;
 	int j = 0;
 	char c;	
-	while ((c = linedata[i++]) && (c != ' ' || c != '\t' || c != '"'))
+	while ((c = linedata[i++]) && (c != ' ' && c != '\t' && c != '"'))
 		cs[j++] = c;
 
 	cs[j] = '\0';//null terminate string
