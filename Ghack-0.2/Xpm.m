@@ -200,7 +200,7 @@ static char * character_rogue_16x16_1_xpm[] = {
 		}
 		//read hex color string with '#HEX' or None	
 		char* colornumberstr = [self getWord:line atIndex:&lineidx];
-		if (!strncmp(colornumberstr, "None",4) || !strncmp(colornumberstr, "none", 4)) {
+		if (strncmp(colornumberstr, "None",4) == 0 || strncmp(colornumberstr, "none", 4) == 0) {
 
 			[self addColorSymbol:colorsymbol Color:0 atIndex:i];
 
@@ -217,8 +217,7 @@ static char * character_rogue_16x16_1_xpm[] = {
 	for ( ; j < col; j++) {
 		char *line = data[j+i];
 
-		//k+! for skipping "
-		for ( ; k+1 < row; k++) {
+		for ( ; k < row; k++) {
 			symboldata[k+row*j] = line[k+1];//skip " at begin and end 
 		}
 		k = 0;	
