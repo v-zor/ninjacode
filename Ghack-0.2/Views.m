@@ -408,7 +408,7 @@ static char * tilegrass1_16x16_xpm[] = {
             		[[NSColor colorWithCalibratedRed:(float)(r & 0xff)
 					green:(float)(g & 0xff)
 					blue:(float)(b & 0xff)
-					alpha:1.0] set];
+					alpha:1.0f] set];
             		PSrectfill(xi, yi, 1, 1);
 		}
 		xi = 0;
@@ -486,11 +486,8 @@ static char * tilegrass2_16x16_xpm[] = {
 - (void) drawRogueCharacter
 {
 
-        [[NSColor darkGrayColor] set];
+        [[NSColor brownColor] set];
 	PSrectfill(0,0,16,16);
-
-        [[NSColor grayColor] set];
-        PSrectfill(0, 0, 5, 3);
 
 	char *data = [con getCharacterXpmData];
 	int i = 0, j = 0;
@@ -505,7 +502,7 @@ static char * tilegrass2_16x16_xpm[] = {
             		[[NSColor colorWithCalibratedRed:(float)(r)
 					green:(float)(g)
 					blue:(float)(b)
-					alpha:1.0] set];
+					alpha:1.0f] set];
 			PSrectfill(j,i, 1,1);			
 	
 		}		
