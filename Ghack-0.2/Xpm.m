@@ -212,10 +212,11 @@ static char * character_rogue_16x16_1_xpm[] = {
 			[self addColorSymbol:colorsymbol Color:valueofhex atIndex:i];
 		}
 	}
-	int j = 0, k = 0;
+	//NOTE that j starts at xpm file linenumber ncolors + 1 for bpp etc
+	int j = ncolors+1, k = 0;
 	symboldata = (char*)malloc(row*col);
-	for ( ; j < col; j++) {
-		char *line = data[j+i];
+	for ( ; j < col + ncolors+1; j++) {
+		char *line = data[j];
 
 		for ( ; k < row; k++) {
 			symboldata[k+row*j] = line[k+1];//skip " at begin and end 
