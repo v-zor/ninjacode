@@ -182,10 +182,9 @@ static char * character_rogue_16x16_1_xpm[] = {
 			[self skipChar:' ' data:line atIndex:&lineidx];
 			[self skipChar:'c' data:line atIndex:&lineidx];
 			[self skipChar:' ' data:line atIndex:&lineidx];
-			char *colorsymbols = ' ';
+			char *colorsymbols = " ";
 			//set colorsymbol which is 1 char wide
 			colorsymbol = colorsymbols[0];
-			free(colorsymbols);
 		} else {	
 			char *colorsymbols = [self getWord:line atIndex:&lineidx];
 			//set colorsymbol which is 1 char wide
@@ -212,14 +211,14 @@ static char * character_rogue_16x16_1_xpm[] = {
 			[self addColorSymbol:colorsymbol Color:valueofhex atIndex:i];
 		}
 	}
-	//NOTE that j starts at xpm file linenumber ncolors + 1 for bpp etc
+	//NOTE that j starts at xpm file linenumber ncolors + 1 for bpp line etc
 	int j = ncolors+1, k = 0;
 	symboldata = (char*)malloc(row*col);
 	for ( ; j < col + ncolors+1; j++) {
 		char *line = data[j];
 
 		for ( ; k < row; k++) {
-			symboldata[k+row*j] = line[k+1];//skip " at begin and end 
+			symboldata[k+row*(j-ncolors-1)] = line[k+1];//skip " at begin and end 
 		}
 		k = 0;	
 	}
