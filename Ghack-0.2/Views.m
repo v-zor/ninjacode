@@ -328,24 +328,20 @@ You should have received a copy of the GNU General Public License along with thi
 
 	//NSLog(@"charxx----> %d, %d,mousep.x---> %d, %d\n", xx, yy, point.x, point.y);
 
-	if (fabs(my - yy) < 3 && fabs(mx - xx) > 3) {
-//	if (mx != xx && fabs(mx - xx) > 3) {
-		if (mx > xx) {
-			[con moveRight:self];
-			//return;
-		} else if (mx < xx) {
-			[con moveLeft:self];
-			//return;
-		}
+	if (mx > xx) {
+		[con moveRight:self];
+		[con setCharacterX:xx+1]; 
+	} else if (mx < xx) {
+		[con moveLeft:self];
+		[con setCharacterX:xx-1]; 
 	}
-	else if (fabs(mx - xx) < 3) {
-		if (my < yy) {
-			[con moveUp:self];
-			//return;
-		} else if (my > yy) {
-			[con moveDown:self];
-			//return;
-		}
+	if (my > yy) {
+		[con moveDown:self];
+		[con setCharacterY:yy+1];
+	} else if (my < yy) {
+		[con moveUp:self];
+		[con setCharacterY:yy-1];
+	} else {
 	}
 
 }

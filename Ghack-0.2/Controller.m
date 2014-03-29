@@ -33,7 +33,7 @@ You should have received a copy of the GNU General Public License along with thi
 
     window = nil;
 
-    srand48(time(NULL));
+////    srand48(time(NULL));
 
     character = [[Character alloc] initAtRow:10 Col:10];
     xpmcharacter = [[Xpm alloc] initWithRogueCharacter];
@@ -494,30 +494,6 @@ You should have received a copy of the GNU General Public License along with thi
     [fields[c][r] setTileState:prevTileState];
     [self genCharacterOnMapRow:r+1 Col:c];
     [fields[c][r+1] setTileState:TILE_CHARACTER];
-/*
-	map[c][r] = TILE_BLANK;
-//	[fields[c][r] dealloc];
-        NSPoint spoint = 
-                NSMakePoint(r*DIMENSION, c*DIMENSION);
-        Square *field = 
-                [[Square alloc] initAtPoint:spoint
-                    row:r col:c tileType:TILE_BLANK controller:self];
-	fields[c][r] = field;
-
-	r += 1;
-	[character dealloc];
-    	character = [[Character alloc] initAtRow:r Col:c];
-	map[c][r] = TILE_CHARACTER;
-//	[fields[c][r] dealloc];
-        NSPoint spoint2 = 
-                NSMakePoint(r*DIMENSION, c*DIMENSION);
-        Square *field2 = 
-                [[Square alloc] initAtPoint:spoint2
-                    row:r col:c tileType:TILE_CHARACTER controller:self];
-	fields[c][r] = field2;
-    //	[item setCovered:TILE_CLICKED];
-*/
-
 }
 
 -(void)moveLeft:(Square*)item
@@ -574,6 +550,17 @@ You should have received a copy of the GNU General Public License along with thi
 {
 	return [character row];
 }
+
+- (int)setCharacterX:r
+{
+	[character setRow:r];
+}
+
+- (int)setCharacterY:c
+{
+	[character setCol:c];
+}
+
 
 @end
 
