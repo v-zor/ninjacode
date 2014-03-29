@@ -405,9 +405,9 @@ static char * tilegrass1_16x16_xpm[] = {
 			r = (unsigned char)(colorCode >> 16);
 			g = (unsigned char)(colorCode >> 8);
 			b = (unsigned char)(colorCode);
-            		[[NSColor colorWithCalibratedRed:(float)(r/0xff)
-					green:(float)(g/0xff)
-					blue:(float)(b/0xff)
+            		[[NSColor colorWithCalibratedRed:(float)(r & 0xff)
+					green:(float)(g & 0xff)
+					blue:(float)(b & 0xff)
 					alpha:1.0] set];
             		PSrectfill(xi, yi, 1, 1);
 		}
@@ -486,9 +486,31 @@ static char * tilegrass2_16x16_xpm[] = {
 - (void) drawRogueCharacter
 {
 
+        [[NSColor darkGrayColor] set];
+	PSrectfill(0,0,16,16);
+
+        [[NSColor grayColor] set];
+        PSrectfill(0, 0, 5, 3);
+
 	char *data = [con getCharacterXpmData];
 	int i = 0, j = 0;
 	for ( ; i < DIMENSION; i++) {//FIXME DIMENSION, xpm w,h
+		for ( ; j < DIMENSION; j++) {//FIXME DIMENSION, xpm w,h
+
+			char colorsymbol = data[i*row+j];
+			int colorCode = [con getColor:colorsymbol];
+			float r = (float)(colorCode >> 16);
+			float g = (float)(colorCode >> 8);
+			float b = (float)(colorCode);
+            		[[NSColor colorWithCalibratedRed:(float)(r)
+					green:(float)(g)
+					blue:(float)(b)
+					alpha:1.0] set];
+			PSrectfill(j,i, 1,1);			
+	
+		}		
+	}
+/****above	for ( ; i < DIMENSION; i++) {//FIXME DIMENSION, xpm w,h
 		for ( ; j < DIMENSION; j++) {//FIXME DIMENSION, xpm w,h
 
 			char colorsymbol = data[i*row+j];
@@ -504,8 +526,24 @@ static char * tilegrass2_16x16_xpm[] = {
 	
 		}
 	}
-	free(data);	
+***/	free(data);	
 
 }
+
+- (int) extractRed:(int)rgb 
+{
+	return ((rgb >> 16) & 0xFF);
+}
+
+- (int) extractGreen:(int)rgb 
+{
+	return ((rgb >> 8) & 0xFF);
+}
+
+- (int) extractBlue:(int)rgb 
+{
+	return (rgb & 0xFF);
+}
+
 @end
 

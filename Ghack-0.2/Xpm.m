@@ -172,13 +172,20 @@ static char * character_rogue_16x16_1_xpm[] = {
 	for ( ; i < ncolors; i++) {
 		char *line = data[i];
 		int lineidx = 0;
+		//skip first " char on colorsymbol line
 		[self skipChar:'"' data:line atIndex:&lineidx];
 		char *colorsymbols = [self getWord:line atIndex:&lineidx];
+		//set colorsymbo which is 1 char wide
 		char colorsymbol = colorsymbols[0];
 		free(colorsymbols);
+
+		//FIXME skip everything until c char
+		[self skipChar:'\t' data:data[0] atIndex:&lineidx];
 		[self skipChar:' ' data:data[0] atIndex:&lineidx];
 		[self skipChar:'c' data:data[0] atIndex:&lineidx];
-	
+		[self skipChar:' ' data:data[0] atIndex:&lineidx];
+
+		//read hex color string with '#HEX' or None	
 		char* colornumberstr = [self getWord:line atIndex:&lineidx];
 		if (!strncmp(colornumberstr, "None",4) || !strncmp(colornumberstr, "none", 4)) {
 
@@ -244,7 +251,7 @@ static char * character_rogue_16x16_1_xpm[] = {
 	int i = *idx;
 	int j = 0;
 	char c;	
-	while ((c = linedata[i++]) && (c != ' ' || c != '"'))
+	while ((c = linedata[i++]) && (c != ' ' || c != '\t' || c != '"'))
 		cs[j++] = c;
 
 	cs[j] = '\0';//null terminate string

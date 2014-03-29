@@ -28,6 +28,7 @@ typedef enum {
 	__struct_MonsterTypeInfo = 50,
     TILE_CLICKED = 1000
 } TILE_STATE;
+
 @interface Square : NSView
 {
     int row, col;
@@ -68,6 +69,9 @@ typedef enum {
 - (void)drawTileGrass1;
 - (void)drawTileGrass2;
 - (void)drawRogueCharacter;
+- (int) extractRed:(int)rgb; 
+- (int) extractGreen:(int)rgb; 
+- (int) extractBlue:(int)rgb; 
 
 @end
 
