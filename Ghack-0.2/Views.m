@@ -329,18 +329,14 @@ You should have received a copy of the GNU General Public License along with thi
 	//NSLog(@"charxx----> %d, %d,mousep.x---> %d, %d\n", xx, yy, point.x, point.y);
 
 	if (mx > xx) {
-		[con moveRight:self];
-		[con setCharacterX:xx+1]; 
+		[con moveRight:self];//also sets char xy
 	} else if (mx < xx) {
 		[con moveLeft:self];
-		[con setCharacterX:xx-1]; 
 	}
 	if (my > yy) {
 		[con moveDown:self];
-		[con setCharacterY:yy+1];
 	} else if (my < yy) {
 		[con moveUp:self];
-		[con setCharacterY:yy-1];
 	} else {
 	}
 
