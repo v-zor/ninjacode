@@ -1,5 +1,0 @@
-to build and run :
-
-. make && openapp ./Ghack.app (or ./Ghack.app/Ghack.exe)
-
-. click for movement
