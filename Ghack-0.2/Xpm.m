@@ -169,7 +169,7 @@ static char * character_rogue_16x16_1_xpm[] = {
 	//FIXMENOTE a color symbol is one char wide (xpm with 256 colors )!
 	symboltable = (int*)malloc(sizeof(int)*256);
 
-	for ( ; i < ncolors; i++) {
+	for ( ; i < ncolors + 1; i++) {
 		char *line = data[i];
 
 		int lineidx = 0;

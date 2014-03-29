@@ -58,6 +58,9 @@ You should have received a copy of the GNU General Public License along with thi
 
 - (char *)getCharacterXpmData;
 
+- (void)setCharacterX:(int)r;
+- (void)setCharacterY:(int)c;
+
 @end
 
 

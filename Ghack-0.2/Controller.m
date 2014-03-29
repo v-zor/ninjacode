@@ -551,12 +551,12 @@ You should have received a copy of the GNU General Public License along with thi
 	return [character row];
 }
 
-- (int)setCharacterX:r
+- (void)setCharacterX:(int)r
 {
 	[character setRow:r];
 }
 
-- (int)setCharacterY:c
+- (void)setCharacterY:(int)c
 {
 	[character setCol:c];
 }
